@@ -1,14 +1,25 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maze Generator</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script> -->
+    <script src="libraries/p5.js"></script>
+    <script src="utils.js"></script>
+    <script src="cell.js"></script>
+    <script src="maze-generator.js"></script>
+    <script src="Generation-Algorithms/DFS.js"></script>
+    <script src="main.js"></script>
 </head>
 <body>
-    <script src="libraries/p5.js"></script>
-    <script src="script.js"></script>
-    <script src="cell.js"></script>
+
+    <select id="algorithm">
+        <option value="DFS">Depth-First Search</option>
+        <option value="Prims">Prim's Algorithm</option>
+    </select>
 </body>
 </html>
+
