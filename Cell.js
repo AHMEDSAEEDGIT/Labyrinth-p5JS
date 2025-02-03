@@ -5,9 +5,10 @@ class Cell {
         this.visited = false;
 
         this.walls = {  top: true, right: true, bottom: true, left: true };
+        
     }
 
-    checkNeighbors() {
+    getNeighbors() {
         let neighbors = [];
         let top = Grid[Index(this.i, this.j - 1)];
         let right = Grid[Index(this.i + 1, this.j)];
@@ -19,12 +20,14 @@ class Cell {
         if (bottom && !bottom.visited) neighbors.push(bottom);
         if (left && !left.visited) neighbors.push(left);
 
-        if (neighbors.length > 0) {
-            let neighborIndex = floor(random(0, neighbors.length));
-            return neighbors[neighborIndex];
-        } else {
-            return undefined;
-        }
+        // if (neighbors.length > 0) {
+        //     let neighborIndex = floor(random(0, neighbors.length));
+        //     return neighbors[neighborIndex];
+        // } else {
+        //     return undefined;
+        // }
+
+        return neighbors.length > 0 ? neighbors : undefined;
     }
 
     highlight() {
@@ -51,4 +54,5 @@ class Cell {
             rect(x, y, TILE, TILE);
         }
     }
+    
 }

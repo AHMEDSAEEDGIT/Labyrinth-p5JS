@@ -7,4 +7,6 @@ class MazeGenerator{
     step(){
         console.log("Hello world ");
     }
+
+    
 }

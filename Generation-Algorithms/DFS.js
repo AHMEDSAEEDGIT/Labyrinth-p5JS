@@ -9,8 +9,10 @@ class DFSGenerator extends MazeGenerator {
         this.current.visited = true;
         this.current.highlight();
 
-        let next = this.current.checkNeighbors();
-        if (next) {
+        let neighbors = this.current.getNeighbors();
+
+        if (neighbors) {
+            let next = neighbors[floor(random(0, neighbors.length))];
             this.stack.push(this.current);
             breakWalls(this.current, next);
             this.current = next;
