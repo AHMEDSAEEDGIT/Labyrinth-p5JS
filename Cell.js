@@ -15,6 +15,21 @@ class Cell {
         let bottom = Grid[Index(this.i, this.j + 1)];
         let left = Grid[Index(this.i - 1, this.j)];
 
+        if (top) neighbors.push(top);
+        if (right) neighbors.push(right);
+        if (bottom) neighbors.push(bottom);
+        if (left) neighbors.push(left);
+
+        return  neighbors;
+    }
+
+    getUnVisitedNeighbours(){
+        let neighbors = [];
+        let top = Grid[Index(this.i, this.j - 1)];
+        let right = Grid[Index(this.i + 1, this.j)];
+        let bottom = Grid[Index(this.i, this.j + 1)];
+        let left = Grid[Index(this.i - 1, this.j)];
+
         if (top && !top.visited) neighbors.push(top);
         if (right && !right.visited) neighbors.push(right);
         if (bottom && !bottom.visited) neighbors.push(bottom);
@@ -53,6 +68,9 @@ class Cell {
             fill(255, 0, 255, 100);
             rect(x, y, TILE, TILE);
         }
+
     }
+
+
     
 }

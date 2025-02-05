@@ -4,21 +4,16 @@ var Grid = [];
 let mazeGenerator;
 
 function setup() {
-    createCanvas(401, 401);
+    createCanvas(801, 801);
     COLS = floor(width / TILE);
     ROWS = floor(height / TILE);
     frameRate(10);
 
     // Create the grid
-    for (var row = 0; row < ROWS; row++) {
-        for (var col = 0; col < COLS; col++) {
-            var cell = new Cell(row, col);
-            Grid.push(cell);
-        }
-    }
+    initializeGrid();
 
     // Initialize DFS maze generation
-     selectAlgorithm("Prims");
+     selectAlgorithm("DFS");
 }
 
 function draw() {
@@ -34,13 +29,18 @@ function draw() {
         console.log("No maze generator selected");
 } 
 
-// document.getElementById("algorithm").addEventListener("change", function () {  selectAlgorithm(this.value);}  );
 
 document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("algorithm").addEventListener("change", function() {
-        selectAlgorithm(this.value);
-    });
+    let algoSelector = document.getElementById("algorithm");
+    if (algoSelector) {
+        algoSelector.addEventListener("change", function() {
+            restartMaze();
+        });
+    } else {
+        console.error("Algorithm selection dropdown not found!");
+    }
 });
+
 
 
 function selectAlgorithm(algorithm) {
@@ -54,3 +54,18 @@ function selectAlgorithm(algorithm) {
      }
  }
  
+ function initializeGrid() {
+    Grid = [];
+    for (let i = 0; i < COLS; i++) {
+        for (let j = 0; j < ROWS; j++) {
+            Grid.push(new Cell(i, j));
+        }
+    }
+}
+
+function restartMaze() {
+    initializeGrid();
+    let algo = document.getElementById("algorithm").value;
+    console.log("Selected algorithm: ", algo);
+    selectAlgorithm(algo);
+}

@@ -2,32 +2,29 @@ class PrimsGenerator extends MazeGenerator{
     
     constructor(grid){
         super(grid);
-        this.frontier = [];
-        this.current.visited = true;
-        console.log("Initialized Prim's Generator");
+        if (grid.length > 0) {
+            this.frontier = [];
+            this.current.visited = true;
+             this.current.highlight();
+            this.addfrontiers(this.current);
+        }
+    
     }
 
     step(){
-        console.log("Step called");
-        this.current.visited = true;
-        // this.current.highlight();
-        this.addfrontiers(this.current);
+
         if(this.frontier.length > 0){
-            let randomIndex = floor(random(0, this.frontier.length));
-            let next = this.frontier[randomIndex];
-            this.frontier.splice(randomIndex, 1);
+            let randomIndex = floor(random(this.frontier.length));
+            let next = this.frontier.splice(randomIndex, 1)[0];
             next.visited = true;    
+            next.highlight();
             this.connectToMaze(next);
             this.addfrontiers(next);
-            console.log("Frontier length: ", this.frontier.length);
-        } else {
-            console.log("No more frontiers");
-        }
-
+        } 
     }
     
     addfrontiers(cell){
-        let neighbors = cell.getNeighbors();
+        let neighbors = cell.getUnVisitedNeighbours();
         if(!neighbors) return;
         for(let neighbor of neighbors){
             if(!this.frontier.includes(neighbor)){
@@ -39,11 +36,13 @@ class PrimsGenerator extends MazeGenerator{
 
     connectToMaze(cell){
         let neighbors = cell.getNeighbors();
-        // let visitedNeighbors = neighbors.filter(neighbor => neighbor.visited);
-        if(neighbors){
-            let randomIndex = floor(random(0, neighbors.length));
-            breakWalls(cell, neighbors[randomIndex]);
-            
+        let visitedNeighbors = neighbors.filter(neighbor => neighbor.visited);
+
+        if(visitedNeighbors.length > 0) {            
+            let randomIndex = floor(random( visitedNeighbors.length));
+            breakWalls (cell,visitedNeighbors[randomIndex]);
         }
     }
+
+    
 }

@@ -5,11 +5,10 @@ class DFSGenerator extends MazeGenerator {
     }
 
     step() {
-        console.log("Hiii");
         this.current.visited = true;
         this.current.highlight();
 
-        let neighbors = this.current.getNeighbors();
+        let neighbors = this.current.getUnVisitedNeighbours();
 
         if (neighbors) {
             let next = neighbors[floor(random(0, neighbors.length))];
