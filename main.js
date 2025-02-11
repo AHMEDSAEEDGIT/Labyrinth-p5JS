@@ -7,7 +7,7 @@ function setup() {
     createCanvas(801, 801);
     COLS = floor(width / TILE);
     ROWS = floor(height / TILE);
-    frameRate(10);
+    frameRate(50);
 
     // Create the grid
     initializeGrid();
@@ -51,15 +51,18 @@ function selectAlgorithm(algorithm) {
      } else if (algorithm === "Prims") {
         // mazeGenerator = new PrimsGenerator(Grid);
         mazeGenerator = new PrimsGenerator(Grid);
+     }else if (algorithm === "HUK"){
+        mazeGenerator = new HUKGenerator(Grid);
      }
  }
  
  function initializeGrid() {
     Grid = [];
-    for (let i = 0; i < COLS; i++) {
-        for (let j = 0; j < ROWS; j++) {
+    for (let j = 0; j < ROWS; j++) {
+        for (let i = 0; i < COLS; i++) {
             Grid.push(new Cell(i, j));
         }
+        console.log("hello world");
     }
 }
 

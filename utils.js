@@ -3,7 +3,7 @@ function Index(i, j) {
     if (i < 0 || j < 0 || i > COLS - 1 || j > ROWS - 1) {
         return -1;
     }
-    return j + i * COLS;
+    return i + j * COLS;
 }
 
 // Remove walls between two cells

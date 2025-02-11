@@ -24,7 +24,8 @@ class PrimsGenerator extends MazeGenerator{
     }
     
     addfrontiers(cell){
-        let neighbors = cell.getUnVisitedNeighbours();
+        //get unvisited neighbors
+        let neighbors = cell.getNeighbors((cell)=> cell !== undefined && !cell.visited);
         if(!neighbors) return;
         for(let neighbor of neighbors){
             if(!this.frontier.includes(neighbor)){
@@ -35,7 +36,7 @@ class PrimsGenerator extends MazeGenerator{
     }
 
     connectToMaze(cell){
-        let neighbors = cell.getNeighbors();
+        let neighbors = cell.getNeighbors((cell)=> cell !== undefined);
         let visitedNeighbors = neighbors.filter(neighbor => neighbor.visited);
 
         if(visitedNeighbors.length > 0) {            
