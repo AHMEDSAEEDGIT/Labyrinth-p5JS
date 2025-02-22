@@ -57,9 +57,6 @@ class HUKGenerator extends MazeGenerator
                 }
             }
             
-        }else{
-            noLoop();
-            console.log("Hunting is Done");
         }
 
     }

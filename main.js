@@ -53,6 +53,8 @@ function selectAlgorithm(algorithm) {
         mazeGenerator = new PrimsGenerator(Grid);
      }else if (algorithm === "HUK"){
         mazeGenerator = new HUKGenerator(Grid);
+     }else if (algorithm === "Kruskal") {
+        mazeGenerator = new KruskalGenerator(Grid);
      }
  }
  
@@ -62,7 +64,6 @@ function selectAlgorithm(algorithm) {
         for (let i = 0; i < COLS; i++) {
             Grid.push(new Cell(i, j));
         }
-        console.log("hello world");
     }
 }
 
