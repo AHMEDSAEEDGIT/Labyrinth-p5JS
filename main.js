@@ -1,19 +1,24 @@
 var COLS, ROWS;
-var TILE = 40;
+var TILE = 30;
 var Grid = [];
 let mazeGenerator;
+let canvas;
+let fps = 30;
+
+
 
 function setup() {
-    createCanvas(801, 801);
+    canvas = createCanvas(901, 901);
+    canvas.parent('maze-container');
     COLS = floor(width / TILE);
     ROWS = floor(height / TILE);
-    frameRate(50);
+    frameRate(fps);
 
     // Create the grid
     initializeGrid();
 
     // Initialize DFS maze generation
-     selectAlgorithm("DFS");
+    //  selectAlgorithm("DFS");
 }
 
 function draw() {
@@ -31,21 +36,31 @@ function draw() {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    let algoSelector = document.getElementById("algorithm");
-    if (algoSelector) {
-        algoSelector.addEventListener("change", function() {
-            restartMaze();
+     
+
+        document.getElementById("gen-algorithm").addEventListener("change", function() { restartMaze();  });
+    
+        document.getElementById("reset").addEventListener("click", function() { restartMaze() });
+
+        document.getElementById("generate").addEventListener("click", function() {
+            let algoSelector = document.getElementById("gen-algorithm").value;
+            
+            selectAlgorithm(algoSelector); 
         });
-    } else {
-        console.error("Algorithm selection dropdown not found!");
-    }
-});
+        document.getElementById("speed-range").addEventListener("change", function() {
+            fps = this.value;
+            console.log("Selected fps: ", fps);
+            frameRate(fps);
+            document.getElementById("speed-display").innerHTML = fps + " FPS";
+        });
+
+    });
 
 
 
 function selectAlgorithm(algorithm) {
     // initializeGrid();
- 
+    
      if (algorithm === "DFS") {
          mazeGenerator = new DFSGenerator(Grid);
      } else if (algorithm === "Prims") {
@@ -69,7 +84,7 @@ function selectAlgorithm(algorithm) {
 
 function restartMaze() {
     initializeGrid();
-    let algo = document.getElementById("algorithm").value;
-    console.log("Selected algorithm: ", algo);
-    selectAlgorithm(algo);
+    mazeGenerator = null;
 }
+
+

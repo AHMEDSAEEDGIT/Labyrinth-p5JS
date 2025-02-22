@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maze Generator</title>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script> -->
+    <title>Maze Generator & Solver</title>
+    <link rel="stylesheet" href="style.css">
     <script src="libraries/p5.js"></script>
     <script src="utils.js"></script>
     <script src="cell.js"></script>
@@ -13,19 +13,53 @@
     <script src="Generation-Algorithms/Prim's.js"></script>
     <script src="Generation-Algorithms/Kruskal.js"></script>
     <script src="Generation-Algorithms/HunAndKill.js"></script>
-
-
     <script src="main.js"></script>
 </head>
 <body>
 
-    <select id="algorithm">
-        <option value="DFS">Depth-First Search</option>
-        <option value="Prims">Prim's Algorithm</option>
-        <option value="HUK">Hunt and Kill Algorithm</option>
-        <option value="Kruskal">Kruskal's Algorithm</option>
+    <div class="sidebar">
+        <h1>Maze Generator & Solver</h1>
 
-    </select>
+        <!-- Maze Generation Controls -->
+        <div class="controls">
+            <h2>Generate Maze</h2>
+            <label for="gen-algorithm">Algorithm:</label>
+            <select id="gen-algorithm">
+                <option value="DFS">Depth-First Search</option>
+                <option value="Prims">Prim's Algorithm</option>
+                <option value="HUK">Hunt and Kill</option>
+                <option value="Kruskal">Kruskal's Algorithm</option>
+            </select>
+            <button id="generate">Generate</button>
+            <button id="reset">Reset</button>
+        </div>
+
+        <!-- Maze Solving Controls -->
+        <div class="controls">
+            <h2>Solve Maze</h2>
+            <label for="solve-algorithm">Algorithm:</label>
+            <select id="solve-algorithm">
+                <option value="BFS">Breadth-First Search</option>
+                <option value="DFS">Depth-First Search</option>
+                <option value="Astar">A* Algorithm</option>
+                <option value="Dijkstra">Dijkstra's Algorithm</option>
+            </select>
+            <button id="solve">Solve</button>
+        </div>
+
+        <!-- Speed Control -->
+        <div class="speed-control">
+            <h2>Speed Control</h2>
+            <input type="range" id="speed-range" min="1" max="60" value="30">
+            <span id="speed-display">30 FPS</span>
+        </div>
+    </div>
+
+    <!-- Maze Grid Area -->
+    <div class="main-content">
+        <div id="maze-container"></div>
+    </div>
+
 </body>
 </html>
 
