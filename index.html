@@ -16,11 +16,9 @@
     <script src="main.js"></script>
 </head>
 <body>
-
-    <div class="sidebar">
-        <h1>Maze Generator & Solver</h1>
-
-        <!-- Maze Generation Controls -->
+    <!-- Left Sidebar -->
+    <div class="sidebar left-sidebar">
+        <h1>Maze Generator</h1>
         <div class="controls">
             <h2>Generate Maze</h2>
             <label for="gen-algorithm">Algorithm:</label>
@@ -30,11 +28,14 @@
                 <option value="HUK">Hunt and Kill</option>
                 <option value="Kruskal">Kruskal's Algorithm</option>
             </select>
-            <button id="generate">Generate</button>
+            <button id="generate">
+                <span id="generate-text">Generate</span>
+                 <!-- <span id="loading-icon" style="display: none;">🔄</span> -->
+            </button>
             <button id="reset">Reset</button>
         </div>
 
-        <!-- Maze Solving Controls -->
+        <h1>Maze Solver</h1>
         <div class="controls">
             <h2>Solve Maze</h2>
             <label for="solve-algorithm">Algorithm:</label>
@@ -46,20 +47,52 @@
             </select>
             <button id="solve">Solve</button>
         </div>
+        
+    </div>
 
-        <!-- Speed Control -->
-        <div class="speed-control">
-            <h2>Speed Control</h2>
-            <input type="range" id="speed-range" min="1" max="60" value="30">
-            <span id="speed-display">30 FPS</span>
+    <!-- Main Content (Grid + Text Animation) -->
+    <div class="main-content">
+        
+        <div  class="text-header">
+            <p class="line-1 anim-typewriter">Generating and solving a maze...</p>
+        </div>
+        <div id="maze-container">
+
         </div>
     </div>
+    
 
-    <!-- Maze Grid Area -->
-    <div class="main-content">
-        <div id="maze-container"></div>
+    <!-- Right Sidebar -->
+    <div class="sidebar right-sidebar">
+        <!-- Additional Controls -->
+        <div class="controls">
+            <h2>Animation Control</h2>
+            <button id="pause-resume">Pause</button>
+            <button id="step">Step</button>
+            <button id="instant-solve">Solve Instantly</button>
+        </div>
+
+        <!-- Grid Size Control -->
+        <div class="controls">
+            <h2>Grid Size</h2>
+            <input type="range" id="grid-size" min="10" max="50" value="20">
+            <span id="grid-size-display">20 x 20</span>
+        </div>
+
+        <!-- Speed Control -->
+        <div class="controls">
+            <h2>Speed Control</h2>
+            <input type="range" id="speed-range" min="1" max="90" value="30">
+            <span id="speed-display">30 FPS</span>
+        </div>
+        
+        
     </div>
-
 </body>
+
+
 </html>
+
+
+
 

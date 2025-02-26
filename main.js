@@ -1,18 +1,20 @@
 var COLS, ROWS;
-var TILE = 30;
+var TILE = 50;
 var Grid = [];
 let mazeGenerator;
 let canvas;
-let fps = 30;
+let fps =30;
+// let isPaused = false;  // Controls pause/resume
+// let isInstantSolve = false; // For solving instantly
 
 
 
 function setup() {
-    canvas = createCanvas(901, 901);
+    canvas = createCanvas(1202, 902);
     canvas.parent('maze-container');
     COLS = floor(width / TILE);
     ROWS = floor(height / TILE);
-    frameRate(fps);
+     frameRate(fps);
 
     // Create the grid
     initializeGrid();
@@ -22,6 +24,7 @@ function setup() {
 }
 
 function draw() {
+    
     background(51);
     for (let cell of Grid) {
         cell.show();
@@ -38,19 +41,33 @@ function draw() {
 document.addEventListener("DOMContentLoaded", function () {
      
 
-        document.getElementById("gen-algorithm").addEventListener("change", function() { restartMaze();  });
+        document.getElementById("gen-algorithm").addEventListener("change", function() { 
+            let generateButton = document.getElementById("generate");
+            generateButton.disabled = false;
+            generateButton.innerHTML = "Generate";
+            restartMaze();  
+        });
     
-        document.getElementById("reset").addEventListener("click", function() { restartMaze() });
+        document.getElementById("reset").addEventListener("click", function() { 
+            let generateButton = document.getElementById("generate");
+            generateButton.disabled = false;
+            generateButton.innerHTML = "Generate";
+            restartMaze() 
+        });
 
         document.getElementById("generate").addEventListener("click", function() {
             let algoSelector = document.getElementById("gen-algorithm").value;
-            
+            let generateButton = document.getElementById("generate");
+
+            generateButton.disabled = true;
+            generateButton.innerHTML = "Generating...";
+
             selectAlgorithm(algoSelector); 
         });
-        document.getElementById("speed-range").addEventListener("change", function() {
-            fps = this.value;
+        document.getElementById("speed-range").addEventListener("input", function() {
             console.log("Selected fps: ", fps);
-            frameRate(fps);
+            fps = parseInt(this.value);  // Convert to integer
+            frameRate(fps);  // Apply new frame rate
             document.getElementById("speed-display").innerHTML = fps + " FPS";
         });
 

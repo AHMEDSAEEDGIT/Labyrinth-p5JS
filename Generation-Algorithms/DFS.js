@@ -19,4 +19,8 @@ class DFSGenerator extends MazeGenerator {
             this.current = this.stack.pop();
         }
     }
+
+    // isComplete() {
+    //     return this.stack.length === 0;  // If stack is empty, maze is done
+    // }
 }
