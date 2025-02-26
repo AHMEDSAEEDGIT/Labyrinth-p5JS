@@ -45,5 +45,10 @@ class PrimsGenerator extends MazeGenerator{
         }
     }
 
+    isComplete() {
+        return this.frontier.length === 0; // If no frontier cells, it's done
+    }
+
+
     
 }

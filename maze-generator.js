@@ -8,4 +8,8 @@ class MazeGenerator{
         console.log("Hello world ");
     }
     
+    isComplete(){
+        return true;
+    }
+    
 }

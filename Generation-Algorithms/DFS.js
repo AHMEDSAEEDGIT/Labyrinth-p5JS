@@ -20,7 +20,9 @@ class DFSGenerator extends MazeGenerator {
         }
     }
 
-    // isComplete() {
-    //     return this.stack.length === 0;  // If stack is empty, maze is done
-    // }
+    // Function to check if maze is complete
+    isComplete() {
+        return this.stack.length === 0;  // If stack is empty, maze is done
+    }
+
 }

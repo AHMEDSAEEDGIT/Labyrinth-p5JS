@@ -4,8 +4,8 @@ var Grid = [];
 let mazeGenerator;
 let canvas;
 let fps =30;
-// let isPaused = false;  // Controls pause/resume
-// let isInstantSolve = false; // For solving instantly
+let isPaused = false;  // Controls pause/resume
+let isCompleteGeneration = false; // For genrating instantly
 
 
 
@@ -30,11 +30,18 @@ function draw() {
         cell.show();
     }
 
-    // Run one step of DFS per frame
-    if (mazeGenerator)
+
+    if (isCompleteGeneration && mazeGenerator){
+        while(!mazeGenerator.isComplete()){
+            mazeGenerator.step()
+        }
+        isCompleteGeneration = false;
+    }
+    
+    if (!isPaused && mazeGenerator) {
         mazeGenerator.step();
-    else
-        console.log("No maze generator selected");
+    }
+
 } 
 
 
@@ -58,7 +65,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("generate").addEventListener("click", function() {
             let algoSelector = document.getElementById("gen-algorithm").value;
             let generateButton = document.getElementById("generate");
-
             generateButton.disabled = true;
             generateButton.innerHTML = "Generating...";
 
@@ -70,6 +76,26 @@ document.addEventListener("DOMContentLoaded", function () {
             frameRate(fps);  // Apply new frame rate
             document.getElementById("speed-display").innerHTML = fps + " FPS";
         });
+
+        // PAUSE Button
+        document.getElementById("pause-resume").addEventListener("click", function() {
+            isPaused = !isPaused;  // Toggle pause state
+            this.innerHTML = isPaused ? "Resume" : "Pause";  // Update button text
+        });
+
+        // STEP Button (Runs One Step)
+        document.getElementById("step").addEventListener("click", function() {
+            if (isPaused && mazeGenerator) {
+                mazeGenerator.step();
+            }
+        });
+
+        // SOLVE INSTANTLY Button (Completes Maze generation in One Go)
+        document.getElementById("complete-generation").addEventListener("click", function() {
+            isCompleteGeneration = true;
+
+        });
+
 
     });
 
