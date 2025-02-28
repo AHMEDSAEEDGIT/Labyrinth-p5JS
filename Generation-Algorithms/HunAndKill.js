@@ -60,4 +60,9 @@ class HUKGenerator extends MazeGenerator
         }
 
     }
+
+    isComplete() {
+        return this.grid.every(cell => cell.visited);
+    }
+
 }

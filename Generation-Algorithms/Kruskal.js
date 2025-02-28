@@ -71,6 +71,10 @@ class KruskalGenerator extends MazeGenerator {
         // Merge two sets
         this.sets[setB] = setA;
     }
-      
-}
+    
+    isComplete() {
+        return this.currentWallIndex >= this.walls.length;
+    }
+
+}   
 

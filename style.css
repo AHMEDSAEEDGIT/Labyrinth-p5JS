@@ -114,9 +114,27 @@ html {
     overflow: hidden;
 }
 
+
 .anim-typewriter {
-    animation: typewriter 5s steps(44) 1s 1 normal both,
-               blinkTextCursor 700ms steps(44) infinite normal;
+    animation: typewriter 5s steps(44) 1s 1 normal both;
+    position: relative; /* Needed for pseudo-element positioning */
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: none; /* Remove original border */
+}
+
+/* Cursor as a pseudo-element */
+.anim-typewriter::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: rgba(255, 255, 255, 0.75);
+    animation: 
+        blinkTextCursor 700ms steps(1) infinite,
+        hideCursor 0s linear 6s forwards;
 }
 
 @keyframes typewriter {
@@ -125,9 +143,14 @@ html {
 }
 
 @keyframes blinkTextCursor {
-    from { border-right-color: rgba(255,255,255,.75); }
-    to { border-right-color: transparent; }
+    0%, 100% { background-color: rgba(255, 255, 255, 0.75); }
+    50% { background-color: transparent; }
 }
+
+@keyframes hideCursor {
+    to { background-color: transparent; }
+}
+
 
 .text-header {
     /* direction: column;
