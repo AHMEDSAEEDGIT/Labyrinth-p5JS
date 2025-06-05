@@ -3,9 +3,10 @@ class Cell {
         this.i = i;
         this.j = j;
         this.visited = false;
-
+         this.reached = false;
         this.walls = {  top: true, right: true, bottom: true, left: true };
-        
+        this.start = false;
+        this.goal = false;
     }
     
     //using higher-order functions we can pass small function 
@@ -51,6 +52,19 @@ class Cell {
             rect(x, y, TILE, TILE);
         }
 
+        if (this.start) {
+            fill(0, 255, 0); // Green for Start
+            rect(x, y, TILE, TILE);
+        } else if (this.goal) {
+            fill(255, 0, 0); // Red for Goal
+            rect(x, y, TILE, TILE);
+        }
+
+    }
+
+    contains(x, y) {
+        return (x > this.i * TILE && x < (this.i + 1) * TILE &&
+                y > this.j * TILE && y < (this.j + 1) * TILE);
     }
 
 

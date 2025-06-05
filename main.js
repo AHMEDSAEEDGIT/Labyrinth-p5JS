@@ -6,6 +6,7 @@ let canvas;
 let fps =30;
 let isPaused = false;  // Controls pause/resume
 let isCompleteGeneration = false; // For genrating instantly
+let startCell, goalCell, solver;
 
 
 
@@ -18,9 +19,6 @@ function setup() {
 
     // Create the grid
     initializeGrid();
-
-    // Initialize DFS maze generation
-    //  selectAlgorithm("DFS");
 }
 
 function draw() {
@@ -41,6 +39,12 @@ function draw() {
     if (!isPaused && mazeGenerator) {
         mazeGenerator.step();
     }
+
+    if (solver && !solver.isComplete) {
+        solver.solveStep();
+        solver.highlightPath();
+    }
+
 
 } 
 
@@ -96,6 +100,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
         });
 
+        document.getElementById("solve").addEventListener("click", function() {
+            startCell = Grid[0];  // Top-left corner
+            goalCell = Grid[Grid.length - 1];  // Bottom-right corner
+        
+            startCell.start = true;
+            goalCell.goal = true;
+            solver = new DFSSolver(Grid, startCell, goalCell);
+
+        });
+
 
     });
 
@@ -129,5 +143,4 @@ function restartMaze() {
     initializeGrid();
     mazeGenerator = null;
 }
-
 
