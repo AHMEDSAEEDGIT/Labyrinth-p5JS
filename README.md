@@ -60,18 +60,4 @@ npx serve . -l 8000
 - To add a solver: implement traversal logic in `Solver-Algorithms`, and wire the control to call the solver after generation completes.
 - Rendering timing and animation are handled inside the `p5.js` draw loop — keep algorithm steps incremental (yielding to the render loop) for smooth animations.
 
-**Suggested improvements / next steps**
-- Add additional solvers (BFS, A*, bidirectional search) with performance comparisons.
-- Add measurement harness to record generation/solver times and path lengths for algorithm comparison.
-- Add configuration UI for grid size, speed, and color themes.
-- Add export (image / SVG) or shareable presets.
 
-**Contribution & License**
-- Contributions welcome: open an issue or PR with a clear description of changes.
-- This project has no license file by default; add a LICENSE if you want to declare reuse rules.
-
-**Contact / About the author**
-- If you are the repository owner, replace this section with your name and contact (LinkedIn, email) and 2–3 resume-oriented bullets summarizing your role and achievements on the project.
-
----
-_README generated to help recruiters quickly understand the project and for developers to pick up and extend the codebase._
